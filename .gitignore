@@ -1,0 +1,3 @@
+scraped/*.csv
+.rvmrc
+Gemfile.lock

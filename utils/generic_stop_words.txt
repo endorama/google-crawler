@@ -1,0 +1,15 @@
+adsJSCode
+currentUrl
+false
+function
+google
+height
+http
+https
+mediawiki
+random
+script
+true
+width
+Wikipedia
+window
