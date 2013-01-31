@@ -1,3 +1,4 @@
 scraped/*.csv
 .rvmrc
 Gemfile.lock
+cnop2.sh
