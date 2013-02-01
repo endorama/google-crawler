@@ -30,10 +30,10 @@ end
 SLEEP_TIME = 5
 WORD_LENGTH_THRESHOLD = 3
 
-abort "#{$0} tag number_of_page_to_be_evaluated" if (ARGV.size != 2)
+abort "#{$0} number_of_page_to_be_evaluated 'tag'" if (ARGV.size < 2)
 
-tag = ARGV[0]
-number_of_page_to_be_evaluated = ARGV[1].to_i
+number_of_page_to_be_evaluated = ARGV[0].to_i
+tag = ARGV[1]
 
 frequency = Hash.new(0)
 google_position = 1
