@@ -33,7 +33,18 @@ WORD_LENGTH_THRESHOLD = 3
 abort "#{$0} number_of_page_to_be_evaluated 'tag'" if (ARGV.size < 2)
 
 number_of_page_to_be_evaluated = ARGV[0].to_i
-tag = ARGV[1]
+
+if ARGV.size > 2
+  arg_count = 1
+  tag = ""
+  while ARGV[arg_count]
+    tag = tag + " #{ARGV[arg_count]}"
+    arg_count += 1
+  end
+  tag.strip!
+else
+  tag = ARGV[1]
+end
 
 frequency = Hash.new(0)
 google_position = 1
