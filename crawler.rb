@@ -134,7 +134,7 @@ agent.get("http://www.google.com") do |home_page|
 
     search_results = search_results.link_with(:text => 'Avanti').click
 
-    if i+1 < number_of_page_to_be_evaluated
+    if i+1 <= number_of_page_to_be_evaluated
       print '[INFO] Page ' + i.to_s + ' done, 5 sec delay before page ' + (i+1).to_s + ' '
       
       for i in 1..SLEEP_TIME
