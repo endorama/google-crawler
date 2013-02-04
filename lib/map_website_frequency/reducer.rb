@@ -26,7 +26,7 @@ ARGF.each do |line|
   else
     if current_word
       # write result to STDOUT
-      p "#{current_word}, #{current_count}"
+      print "#{current_word}, #{current_count}\n"
     end
     
     current_count = count
@@ -36,5 +36,5 @@ end
 
 # do not forget to output the last word if needed!
 if current_word == word
-  p "#{current_word}, #{current_count}"
+  print "#{current_word}, #{current_count}\n"
 end

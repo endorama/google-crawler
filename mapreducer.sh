@@ -1,12 +1,17 @@
 #!/bin/bash
 
-path=$(dirname $1)
-file=$(basename "$1")
-extension="${file##*.}"
-filename="${file%.*}"
+echo "Applying mapreduce..."
 
-file="${path}/${filename}.${extension}"
-file_mapreduced="${path}/${filename}.mapreduced.${extension}"
+echo "Calculating website frequency... "
+bash lib/map_website_frequency/run.sh $1
+echo "[DONE]"
 
-echo "url, count" > $file_mapreduced
-cat "${file}" | cut -f 1 -d ',' | sort | ruby mapper.rb | sort -k1,1 | ruby reducer.rb | sort -k2,2 --reverse >> "${file_mapreduced}"
+echo "Calculating website position..."
+bash lib/map_website_position/run.sh $1
+echo "[DONE]"
+
+echo "Mapping website frequency to position"
+bash lib/map_frequency_position/run.sh $1
+echo "[DONE]"
+
+echo "Applying mapreduce... [DONE]"

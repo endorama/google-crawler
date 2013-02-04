@@ -13,6 +13,8 @@ keywords => the 10 words more used on the page ( got by parsing the whole <body>
 
 Tested using ruby 1.9.3
 
+# References
+
 Some reference used to build the project:
 
 http://ruby.bastardsbook.com/chapters/html-parsing/
@@ -25,3 +27,7 @@ http://semantichumanities.wordpress.com/2006/02/21/word-frequencies-in-ruby-tuto
 # Known issues
 
 Does not handle redirects.
+
+# TODO
+
+search all items present in more than one list ( by search tag ) and aggregate the tags ( in separate files? )
