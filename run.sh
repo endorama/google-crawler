@@ -1,5 +1,3 @@
 #!/bin/bash
 
-bash executer.sh depressione
-
-
+bash executer.sh tag
