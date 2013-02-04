@@ -7,6 +7,7 @@ ad
 adesso
 agl
 agli
+agosto
 ai
 al
 all
@@ -63,6 +64,7 @@ col
 come
 comprare
 con
+condivi
 consecutivi
 consecutivo
 contro
@@ -89,6 +91,7 @@ dentro
 deve
 devo
 di
+dicembre
 doppio
 dov
 dove
@@ -141,6 +144,7 @@ fareste
 faresti
 farete
 farò
+febbraio
 fece
 fecero
 feci
@@ -157,8 +161,10 @@ fu
 fui
 fummo
 furono
+gennaio
 gente
 giu
+giugno
 gli
 ha
 hai
@@ -178,9 +184,11 @@ lei
 li
 lo
 loro
+luglio
 lui
 lungo
 ma
+marzo
 me
 meglio
 mi
@@ -209,12 +217,14 @@ nostre
 nostri
 nostro
 nove
+novembre
 nuovi
 nuovo
 o
 oltre
 ora
 otto
+ottobre
 peggio
 per
 perché
@@ -266,6 +276,7 @@ sembra
 sembrava
 senza
 sette
+settembre
 si
 sia
 siamo
