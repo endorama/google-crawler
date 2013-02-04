@@ -46,7 +46,8 @@ stop_words = load_stop_words
 
 agent = Mechanize.new { |a|
   a.follow_meta_refresh = true
-  a.user_agent_alias = 'Linux Firefox'
+  # a.user_agent_alias = 'Linux Firefox'
+  a.user_agent_alias = 'Mac FireFox'
 }
 # agent.enable_gzip()
 
