@@ -6,7 +6,7 @@ file50="${file}-50.csv"
 file20="${file}-20.csv"
 file10="${file}-10.csv"
 
-ruby crawler.rb 50 $file50
+ruby crawler.rb 50 $1
 bash mapreducer.sh $file50
 
 bash get_smaller_dataset.sh $file50 20
