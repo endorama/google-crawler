@@ -1,6 +1,6 @@
 #!/bin/bash
 
-for i in $(ls -v scraped/*.mapreduced.csv); do
+for i in $(ls -v results/*.mapreduced.csv); do
   ruby lib/map_all_website/mapper.rb $i
 done
 
