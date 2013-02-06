@@ -57,3 +57,16 @@ def write_array_of_hashes_to_csv(file, data)
     end
   end
 end
+
+def write_array_of_array_to_csv(file, data)
+  CSV.open("#{file}", "w", { :force_quotes => true }) do |csv|
+    csv << data[0][1].keys
+    data.each do |d|
+      ar = Array.new
+      d[1].each do |u|
+        ar << u[1]
+      end
+      csv << ar
+    end
+  end
+end
