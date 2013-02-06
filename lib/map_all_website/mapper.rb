@@ -7,7 +7,6 @@ data = get_data_from_mapreduced_csv(ARGV[0])
 
 data.each do |u|
   u[:tag] = tag
-  p u
 end
 
 write_array_of_hashes_to_csv("tmp/#{tag.gsub(/ /, '_')}.tagged.csv", data)
