@@ -1,11 +1,18 @@
+require 'digest/md5'
+
 require_relative '../common_functions.rb'
 require_relative '../csv.rb'
 
+SORT_BY = :count
+REVERSE = true
+
 final = Hash.new
+tags = Array.new
 
 data = get_data_from_file(ARGV[0])
 
 data.each do |e|
+  tags << e["tag"]
   
   if final[e["url"]]
     final[e["url"]] = {
@@ -21,9 +28,17 @@ data.each do |e|
       :google_position => e["google_position"],
       :tag => e["tag"]
     }
-
   end
-
 end
 
-write_array_of_hashes_to_csv('results/aggregate.csv', final.values)
+unless REVERSE
+  final = final.sort_by { |key, value| value[SORT_BY].to_i }
+else
+  final = final.sort_by { |key, value| value[SORT_BY].to_i }.reverse
+end
+
+tags.uniq!
+filename = Digest::MD5.hexdigest(tags.each {|t| t.gsub(/ /, '_')}.join('-'))
+File.open("results/#{filename}.txt", 'w') {|f| f.write(tags.join("\n")) }
+
+write_array_of_array_to_csv("results/#{filename}.#{ARGV[1]}.aggregate.csv", final)
