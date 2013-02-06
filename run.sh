@@ -1,3 +1,6 @@
 #!/bin/bash
 
-bash executer.sh tag
+tag="search tag"
+
+bash executer.sh $tag
+bash aggregate.sh $tag
