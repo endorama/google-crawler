@@ -5,7 +5,7 @@ for i in $(ls -v scraped/*.mapreduced.csv); do
 done
 
 echo '"url","count","google_position","tag"' > tmp/first_aggregation.csv
-for i in $(ls -v tmp/*.all.csv); do
+for i in $(ls -v tmp/*.tagged.csv); do
   echo $i
   tail $i -n +2 >> tmp/first_aggregation.csv
 done

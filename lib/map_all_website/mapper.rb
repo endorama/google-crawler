@@ -10,4 +10,4 @@ data.each do |u|
   p u
 end
 
-write_array_of_hashes_to_csv("tmp/#{tag.gsub(/ /, '_')}.all.csv", data)
+write_array_of_hashes_to_csv("tmp/#{tag.gsub(/ /, '_')}.tagged.csv", data)
