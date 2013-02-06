@@ -12,4 +12,4 @@ done
 
 ruby lib/map_all_website/reducer.rb tmp/first_aggregation.csv
 
-rm tmp/*.csv
+rm -f tmp/*.csv

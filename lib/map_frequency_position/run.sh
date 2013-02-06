@@ -12,4 +12,5 @@ file_position="tmp/${filename}.website_position.${extension}"
 
 echo "url, frequency, google_position" > $file_mapreduced
 ruby $(pwd)/lib/map_frequency_position/mapper.rb $file_frequency $file_position $file_mapreduced >> $file_mapreduced
-# ruby $(pwd)/lib/map_frequency_position/mapper.rb $file_frequency $file_position >> $file_mapreduced
+
+rm -f tmp/*.csv
