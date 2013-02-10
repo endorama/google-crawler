@@ -5,3 +5,4 @@ cnop2.sh
 tmp/*.csv
 results/*.csv
 results/*.txt
+.ignored
