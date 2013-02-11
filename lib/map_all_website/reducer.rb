@@ -31,14 +31,68 @@ data.each do |e|
   end
 end
 
-unless REVERSE
-  final = final.sort_by { |key, value| value[SORT_BY].to_i }
-else
-  final = final.sort_by { |key, value| value[SORT_BY].to_i }.reverse
+final = final.sort_by { |key, value| value[SORT_BY].to_i }
+
+if REVERSE
+  final.reverse!
 end
 
 tags.uniq!
-filename = Digest::MD5.hexdigest(tags.each {|t| t.gsub(/ /, '_')}.join('-'))
+
+data = Array.new
+final.each do |d|
+  ps = d[1][:google_position].split(', ')
+  ts = d[1][:tag].split(', ')
+
+  data << {
+    :url => d[1][:url],
+    :count => d[1][:count],
+  }
+
+  tags_positions = Array.new
+  for i in 0..ts.length
+    if ts[i]
+      tags_positions << {
+        :tag => ts[i],
+        :position => ps[i]
+      }
+    end
+  end
+
+  tags.each do |t|
+    tag_text = "tag_#{tags.index(t)}"
+    position_text = "position_#{tags.index(t)}"
+    # tag_text = "tag-#{t.gsub(/ /, '_')}"
+    # position_text = "position-#{t.gsub(/ /, '_')}"
+    
+    if ts.include? t
+      data.last[tag_text] = t
+      data.last[position_text] = tags_positions.select { |x| x[:tag] == t }[0][:position]
+    else
+      data.last[tag_text] = t
+      data.last[position_text] = 0
+    end
+  end
+end
+
+$LOG.debug "data.last is #{data.last}"
+
+main_tag = ""
+tags.each do |t|
+  if t.split.length > 1
+    main_tag = t.split[0]
+  elsif t.split.length == 1
+    unless main_tag == t.split[0]
+      p "urgh!"
+    end
+  end
+end
+
+$LOG.debug "main_tag is #{main_tag}"
+
+filename = main_tag + "-" + Digest::MD5.hexdigest(tags.each {|t| t.gsub(/ /, '_')}.join('-'))
 File.open("results/#{filename}.txt", 'w') {|f| f.write(tags.join("\n")) }
 
-write_array_of_array_to_csv("results/#{filename}.#{ARGV[1]}.aggregate.csv", final)
+filename = "#{filename}.#{ARGV[1]}.aggregate.test.csv"
+$LOG.debug "filename is #{filename}"
+write_array_of_hashes_to_csv("results/#{filename}", data)
