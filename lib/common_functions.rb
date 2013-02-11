@@ -8,3 +8,28 @@ rescue URI::BadURIError
 rescue URI::InvalidURIError
   false
 end
+
+require 'logger'
+
+$LOG = Logger.new(STDOUT)
+
+$LOG.level = Logger::WARN
+
+$LOG.formatter = proc { |severity, datetime, progname, msg|
+  case severity
+  when 'DEBUG'
+    spaciator = "    *"
+  when 'INFO'
+    spaciator = "   **"
+  when 'WARN'
+    spaciator = "  ***"
+  when 'ERROR'
+    spaciator = " ****"
+  when 'FATAL'
+    spaciator = "*****"
+  else
+    spaciator = "     "
+  end
+
+  print " #{spaciator} [#{severity}] [#{datetime}] -- #{msg}\n"
+}
