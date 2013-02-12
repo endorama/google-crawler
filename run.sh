@@ -14,8 +14,8 @@
 #  bash aggregate "15"
 
 
-# TODO
-# bash archiver.sh
+#  Archive results after completion
+#  bash archiver.sh
 
 #  Send a mail to a specified address in order to inform when the task has
 #+ finished.
