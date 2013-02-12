@@ -11,7 +11,7 @@
 #  Aggergate all mapreduced result of specified page number present in results 
 #+ folder.
 #
-#  bash aggregate "15"
+#  bash aggregate.sh "15"
 
 
 #  Archive results after completion
