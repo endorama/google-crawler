@@ -10,5 +10,3 @@ for i in $(ls -v tmp/*.tagged.csv); do
 done
 
 ruby lib/map_all_website/reducer.rb tmp/first_aggregation.csv ${1:2:2}
-
-rm -f tmp/*.csv
