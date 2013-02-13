@@ -27,12 +27,13 @@ cp $results_patter $archived_dir
 cp $results_txt_pattern $archived_dir
 
 cd $archived_dir
-zip -9 -r $tar_filename *
+zip -9 -r $zip_filename *
 mv $zip_filename ..
 cd ../..
 
 rm $archived_dir -r
 rm $raw_pattern
+rm $mapreduced_pattern
 rm $results_patter
 rm $results_txt_pattern
 rm tmp/*.csv
