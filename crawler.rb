@@ -21,7 +21,7 @@ require_relative 'lib/common_functions.rb'
 require_relative 'lib/crawler.rb'
 
 SAVE_FOLDER = "scraped"
-SLEEP_TIME = 5
+SLEEP_TIMES = [2,5,7,10,12,14]
 WORD_LENGTH_THRESHOLD = 3
 
 abort "#{$0} number_of_page_to_be_evaluated 'tag'" if (ARGV.size < 2)
@@ -94,9 +94,10 @@ agent.get("http://www.google.it/search?q=#{tag.gsub(/ /, '+')}") do |home_page|
     print "\n"
 
     if i+1 <= number_of_page_to_be_evaluated
-      print '[INFO] Page ' + i.to_s + ' done, 5 sec delay before page ' + (i+1).to_s + ' '
+      sleep_time = SLEEP_TIMES.sample
+      print "[INFO] Page #{i.to_s} done, #{sleep_time} sec delay before page #{(i+1).to_s} "
       
-      for i in 1..SLEEP_TIME
+      for i in 1..sleep_time
         print '.'
         sleep 1
       end
