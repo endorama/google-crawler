@@ -20,6 +20,9 @@ require 'open-uri'
 require_relative 'lib/common_functions.rb'
 require_relative 'lib/crawler.rb'
 
+$LOG.level = Logger::INFO
+
+AGENT_ALIASES = ['Linux Firefox', 'Linux Konqueror', 'Linux Mozilla', 'Mac Firefox', 'Mac Mozilla', 'Mac Safari 4', 'Mac Safari', 'Windows IE 6', 'Windows IE 7', 'Windows IE 8', 'Windows IE 9', 'Windows Mozilla']
 SAVE_FOLDER = "scraped"
 SLEEP_TIMES = [2,5,7,10,12,14]
 WORD_LENGTH_THRESHOLD = 3
@@ -46,25 +49,18 @@ stop_words = load_stop_words
 
 agent = Mechanize.new { |a|
   a.follow_meta_refresh = true
-  # a.user_agent_alias = 'Linux Firefox'
-  a.user_agent_alias = 'Mac FireFox'
+  a.user_agent_alias = AGENT_ALIASES.sample
 }
-# agent.enable_gzip()
 
-print '[INFO] Starting elaboration for ' + number_of_page_to_be_evaluated.to_s + ' page/s of google results with tag "' + tag + "\"\n"
-
-# agent.get("http://www.google.com") do |home_page|
-
-#   search_results = home_page.form_with(:name => "f") do |form|
-#     form.q = tag
-#   end.submit
+$LOG.info "Starting elaboration for #{number_of_page_to_be_evaluated.to_s} page/s of google results with tag '#{tag}'"
 
 agent.get("http://www.google.it/search?q=#{tag.gsub(/ /, '+')}") do |home_page|
   search_results = home_page
 
   for i in 1..number_of_page_to_be_evaluated
-    print '[INFO] Scraping page ' + i.to_s + ' of ' + number_of_page_to_be_evaluated.to_s + ' '
+    $LOG.info "Scraping page #{i.to_s} of #{number_of_page_to_be_evaluated.to_s}"
 
+    print "       "
     (search_results/"h3.r").each do |result|
       print '.'
 
@@ -95,9 +91,10 @@ agent.get("http://www.google.it/search?q=#{tag.gsub(/ /, '+')}") do |home_page|
 
     if i+1 <= number_of_page_to_be_evaluated
       sleep_time = SLEEP_TIMES.sample
-      print "[INFO] Page #{i.to_s} done, #{sleep_time} sec delay before page #{(i+1).to_s} "
+      $LOG.info "[INFO] Page #{i.to_s} done, #{sleep_time} sec delay before page #{(i+1).to_s}"
       
-      for i in 1..sleep_time
+      print "       "
+      for j in 1..sleep_time
         print '.'
         sleep 1
       end
@@ -106,15 +103,15 @@ agent.get("http://www.google.it/search?q=#{tag.gsub(/ /, '+')}") do |home_page|
     end
 
     begin
-      search_results = search_results.link_with(:text => 'Avanti').click
+      search_results = agent.get("http://www.google.it/search?q=#{tag.gsub(/ /, '+')}&start=#{i*10}")
     rescue
-      print "No 'Next' link present in page\n"
+      $LOG.warn "Cannot retrieve next results page. Tag: #{tag} | Page: #{i}"
     end
   end
 end
 
 filename = tag.gsub(' ', '_') + '-' + number_of_page_to_be_evaluated.to_s + ".csv"
-print '[INFO] Writing to file scraped/' + filename + "\n"
+$LOG.info "Writing to file scraped/#{filename}"
 
 if not (File.exists?(SAVE_FOLDER) && File.directory?(SAVE_FOLDER))
   Dir.mkdir(SAVE_FOLDER)
@@ -128,4 +125,4 @@ CSV.open("#{SAVE_FOLDER}/" + filename, "w", { :force_quotes => true }) do |csv|
   end
 end
 
-print '[DONE]' + "\n"
+$LOG.info "DONE"

@@ -22,7 +22,7 @@ def get_word_frequencies(url, stop_words)
       :replace           => '',        # Use a blank for those replacements
       :universal_newline => true       # Always break lines with \n
     }
-    # Remove <script>…</script>
+    # Remove <script>...</script>
     site.css('script').remove                          
     # Remove on____ attributes   
     site.xpath("//@*[starts-with(name(),'on')]").remove
