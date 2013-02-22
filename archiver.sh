@@ -6,10 +6,10 @@ archived_dir="archived/$date"
 archived_raw_dir="archived/$date/raw"
 archived_mapreduced_dir="archived/$date/mapreduced"
 
-raw_pattern="scraped/*.csv"
-mapreduced_pattern="results/*.mapreduced.csv"
-results_patter="results/*.aggregate.*"
-results_txt_pattern="results/*.txt"
+raw_pattern=scraped/*.csv
+mapreduced_pattern=results/*.mapreduced.csv
+results_patter=results/*.aggregate.*
+results_txt_pattern=results/*.txt
 
 zip_filename="$date.zip"
 
